@@ -6,7 +6,7 @@ using System.Windows.Navigation;
 
 namespace _2048
 {
-    class Model
+    public class Model
     {
         public List<List<int>> Arr { get; private set; } = new List<List<int>>()
         {
@@ -25,7 +25,7 @@ namespace _2048
         {
             Arr[rnd.Next(4)][rnd.Next(4)] = 2;
         }
-        private int EmptyCellsNumber()
+        public int EmptyCellsNumber()
         {
             int cells = 0;
             for(int i = 0; i < Arr.Count; i++)
@@ -122,28 +122,38 @@ namespace _2048
             for (int row = 0; row < Arr.Count; row++)
             {
                 bool[] merged = new bool[Arr[row].Count];
+
                 for (int col = 2; col >= 0; col--)
                 {
                     if (Arr[row][col] == 0) continue;
                     int c = col;
 
-                    while (c < 3 && Arr[row][c + 1] == 0)
+                    while (c < 3)
                     {
-                        (Arr[row][c + 1], Arr[row][col]) = (Arr[row][col], Arr[row][c + 1]);
-                        c--;
-                        moved = true;
-                    }
-                    if(c < 3 && Arr[row][c+1] == Arr[row][c] && !merged[c + 1])
-                    {
-                        Arr[row][c + 1] *= 2;
-                        Arr[row][c] = 0;
-                        merged[c+1] = true;
-                        moved = true;
+                        if (Arr[row][c + 1] == 0)
+                        {
+                            (Arr[row][c + 1], Arr[row][c]) = (Arr[row][c], Arr[row][c + 1]);
+                            c++;
+                            moved = true;
+                        }
+                        else if (Arr[row][c + 1] == Arr[row][c] && !merged[c + 1])
+                        {
+                            Arr[row][c + 1] *= 2;
+                            Arr[row][c] = 0;
+                            merged[c + 1] = true;
+                            moved = true;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
                 }
             }
             return moved;
         }
+
         public bool MoveLeft()
         {
             bool moved = false;
@@ -173,5 +183,7 @@ namespace _2048
             }
             return moved;
         }
+
+        public bool CanMove() => EmptyCellsNumber() == 0 ? false : true;
     }
 }

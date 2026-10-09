@@ -66,25 +66,25 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Row="0" Grid.Column="0" Tag="00" Margin="1" IsEnabled="False"/>
-                <Button Grid.Row="0" Grid.Column="1" Tag="01" Margin="1" IsEnabled="False"/>
-                <Button Grid.Row="0" Grid.Column="2" Tag="02" Margin="1" IsEnabled="False"/>
-                <Button Grid.Row="0" Grid.Column="3" Tag="03" Margin="1" IsEnabled="False"/>
+                <Button Grid.Row="0" Grid.Column="0" Content="{Binding GameGrid[0]}" Tag="00" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="{Binding GameGrid[1]}" Tag="01" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="0" Grid.Column="2" Content="{Binding GameGrid[2]}" Tag="02" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="0" Grid.Column="3" Content="{Binding GameGrid[3]}" Tag="03" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
 
-                <Button Grid.Row="1" Grid.Column="0" Tag="00" Margin="1" IsEnabled="False"/>
-                <Button Grid.Row="1" Grid.Column="1" Tag="01" Margin="1" IsEnabled="False"/>
-                <Button Grid.Row="1" Grid.Column="2" Tag="02" Margin="1" IsEnabled="False"/>
-                <Button Grid.Row="1" Grid.Column="3" Tag="03" Margin="1" IsEnabled="False"/>
+                <Button Grid.Row="1" Grid.Column="0" Content="{Binding GameGrid[4]}" Tag="10" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="1" Grid.Column="1" Content="{Binding GameGrid[5]}" Tag="11" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="1" Grid.Column="2" Content="{Binding GameGrid[6]}" Tag="12" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="1" Grid.Column="3" Content="{Binding GameGrid[7]}" Tag="13" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
 
-                <Button Grid.Row="2" Grid.Column="0" Tag="00" Margin="1" IsEnabled="False"/>
-                <Button Grid.Row="2" Grid.Column="1" Tag="01" Margin="1" IsEnabled="False"/>
-                <Button Grid.Row="2" Grid.Column="2" Tag="02" Margin="1" IsEnabled="False"/>
-                <Button Grid.Row="2" Grid.Column="3" Tag="03" Margin="1" IsEnabled="False"/>
+                <Button Grid.Row="2" Grid.Column="0" Content="{Binding GameGrid[8]}" Tag="20" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="2" Grid.Column="1" Content="{Binding GameGrid[9]}" Tag="21" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="2" Grid.Column="2" Content="{Binding GameGrid[10]}" Tag="22" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="2" Grid.Column="3" Content="{Binding GameGrid[11]}" Tag="23" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
 
-                <Button Grid.Row="3" Grid.Column="0" Tag="00" Margin="1" IsEnabled="False"/>
-                <Button Grid.Row="3" Grid.Column="1" Tag="01" Margin="1" IsEnabled="False"/>
-                <Button Grid.Row="3" Grid.Column="2" Tag="02" Margin="1" IsEnabled="False"/>
-                <Button Grid.Row="3" Grid.Column="3" Tag="03" Margin="1" IsEnabled="False"/>
+                <Button Grid.Row="3" Grid.Column="0" Content="{Binding GameGrid[12]}" Tag="30" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="3" Grid.Column="1" Content="{Binding GameGrid[13]}" Tag="31" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="3" Grid.Column="2" Content="{Binding GameGrid[14]}" Tag="32" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black "/>
+                <Button Grid.Row="3" Grid.Column="3" Content="{Binding GameGrid[15]}" Tag="33" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
             </Grid>
         </Border>
     </Grid>

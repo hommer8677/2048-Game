@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using _2048.VM;
 
 namespace _2048
 {
@@ -17,19 +18,18 @@ namespace _2048
     public partial class MainWindow : Window
     {
         private Button[,] buttons = new Button[4, 4];
+        GameViewModel vm;
         public MainWindow()
         {
             InitializeComponent();
-            CreateGameField();
-        }
-        private void CreateGameField()
-        {
-            
+            Model m = new Model();
+            vm = new GameViewModel(m);
+            this.DataContext = vm;
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-
+            vm.OnKeyPress(e);
         }
     }
 }

@@ -1,3 +1,4 @@
 <Solution>
-  <Project Path="2048/2048.csproj" />
+  <Folder Name="/Элементы решения/" />
+  <Project Path="2048/Game2048.csproj" />
 </Solution>

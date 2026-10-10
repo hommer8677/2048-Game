@@ -1,8 +1,10 @@
 ﻿using _2048.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Windows.Input;
+using System.Windows.Shapes;
 
 namespace _2048.VM
 {
@@ -12,7 +14,7 @@ namespace _2048.VM
 
         // Обычные поля для хранения данных
         private int score;
-        private int highScore;
+        private int highScore = 0;
         private bool isGameOver;
         private string[] gameGrid = new string[16];
 
@@ -46,6 +48,7 @@ namespace _2048.VM
         {
             model = gameModel;
             gameGrid = new string[16]; // Создаем сетку 4 на 4
+            ReadScore();
             InitNewGame();
         }
 
@@ -62,11 +65,11 @@ namespace _2048.VM
         }
 
         // Метод, который вызывается при нажатии клавиш
-        public void OnKeyPress(KeyEventArgs e)
+        public void OnKeyPress(Key e)
         {
             if (IsGameOver) return;
 
-            switch (e.Key)
+            switch (e)
             {
                 case Key.Up:
                     model.MoveUp();
@@ -85,10 +88,14 @@ namespace _2048.VM
 
             model.NewNum();
             SyncWithModel();
+            Score = model.NowScore();
+            if (Score > HighScore) HighScore = Score;
+            Notify();
 
             if (model.CanMove() == false && model.EmptyCellsNumber() == 0)
             {
                 IsGameOver = true;
+                WriteRecord();
             }
         }
         private void SyncWithModel()
@@ -104,7 +111,28 @@ namespace _2048.VM
                     gameGrid[index] = val == 0 ? "" : val.ToString();
                 }
             }
+        }
+        private void Notify()
+        {
+            OnPropertyChanged("Score");
             OnPropertyChanged("GameGrid");
+            OnPropertyChanged("HighScore");
+        }
+        private void WriteRecord()
+        {
+            string fileName = "score.txt";
+            File.WriteAllText(fileName, HighScore.ToString());
+        }
+        private void ReadScore()
+        {
+            string fileName = "score.txt";
+            if (File.Exists(fileName))
+            {
+                try
+                {
+                    HighScore = int.Parse(File.ReadAllText(fileName));
+                }catch(Exception e) { WriteRecord(); }
+            }
         }
     }
 }

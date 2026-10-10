@@ -29,7 +29,7 @@ namespace _2048
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            vm.OnKeyPress(e);
+            vm.OnKeyPress(e.Key);
         }
     }
 }

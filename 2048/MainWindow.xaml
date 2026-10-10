@@ -35,7 +35,7 @@
                            HorizontalAlignment="Center" VerticalAlignment="Top" 
                            FontFamily="SimSun-ExtG"/>
                     <TextBlock x:Name="CurrentScore" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                               Width="100" Height="30" Text="2048" Foreground="#FF3E47D0"
+                               Width="100" Height="30" Text="{Binding Score}" Foreground="#FF3E47D0"
                                FontFamily="Yu Gothic Medium" FontSize="24" TextAlignment="Center"/>
                 </StackPanel>
             </Border>
@@ -45,7 +45,7 @@
                     <Label Content="Best score" FontSize="22" 
                            HorizontalAlignment="Center" VerticalAlignment="Top" 
                            FontFamily="SimSun-ExtG"/>
-                    <TextBlock x:Name="BestScore" HorizontalAlignment="Center" VerticalAlignment="Top" Text="2048"
+                    <TextBlock x:Name="BestScore" HorizontalAlignment="Center" VerticalAlignment="Top" Text="{Binding HighScore}"
                              Width="100" Height="30" Foreground="#FFBB4B4B"
                             FontFamily="Yu Gothic Medium" FontSize="24" TextAlignment="Center"/>
                 </StackPanel>

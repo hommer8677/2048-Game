@@ -19,11 +19,7 @@ namespace _2048
         Random rnd = new Random();
         public Model()
         {
-            InitArr();
-        }
-        private void InitArr()
-        {
-            Arr[rnd.Next(4)][rnd.Next(4)] = 2;
+            
         }
         public int EmptyCellsNumber()
         {
@@ -185,5 +181,14 @@ namespace _2048
         }
 
         public bool CanMove() => EmptyCellsNumber() == 0 ? false : true;
+        public int NowScore()
+        {
+            int score = 2;
+            for(int i = 0; i < Arr.Count; i++)
+            {
+                if(Arr[i].Max() > score) score = Arr[i].Max();
+            }
+            return score;
+        }
     }
 }

@@ -11,14 +11,12 @@ namespace _2048.VM
     public class GameViewModel: ViewModelBase
     {
         private Model model;
-
-        // Обычные поля для хранения данных
+        public event Action<string> GameEnded;
         private int score;
         private int highScore = 0;
         private bool isGameOver;
         private string[] gameGrid = new string[16];
 
-        // Свойства, которые отдают данные в интерфейс
         public int Score
         {
             get { return score; }
@@ -42,17 +40,13 @@ namespace _2048.VM
             get { return gameGrid; }
             set { SetProperty(ref gameGrid, value); }
         }
-
-        // Конструктор
         public GameViewModel(Model gameModel)
         {
             model = gameModel;
-            gameGrid = new string[16]; // Создаем сетку 4 на 4
+            gameGrid = new string[16];
             ReadScore();
             InitNewGame();
         }
-
-        // Запуск новой игры
         public void InitNewGame()
         {
             Score = 0;
@@ -63,8 +57,6 @@ namespace _2048.VM
 
             SyncWithModel();
         }
-
-        // Метод, который вызывается при нажатии клавиш
         public void OnKeyPress(Key e)
         {
             if (IsGameOver) return;
@@ -83,7 +75,7 @@ namespace _2048.VM
                 case Key.Left:
                     model.MoveLeft();
                     break;
-                default: break;
+                default: return;
             }
 
             model.NewNum();
@@ -96,6 +88,7 @@ namespace _2048.VM
             {
                 IsGameOver = true;
                 WriteRecord();
+                GameEnded?.Invoke($"Поздравляем! Игра завершена.\nВаш текущий счёт: {Score}");
             }
         }
         private void SyncWithModel()
@@ -107,7 +100,6 @@ namespace _2048.VM
                     int index = (row * 4) + col;
                     int val = model.Arr[row][col];
 
-                    // Если ноль — делаем плитку визуально пустой
                     gameGrid[index] = val == 0 ? "" : val.ToString();
                 }
             }

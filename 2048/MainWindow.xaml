@@ -5,54 +5,71 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_2048"
         mc:Ignorable="d"
-        Title="2048" Height="521" Width="407" KeyDown="Window_KeyDown">
-    
+        Title="2048" Height="521" Width="407" KeyDown="Window_KeyDown"
+        Background="#FAF8EF"
+        ResizeMode="NoResize">
+
     <Window.Resources>
         <Style x:Key="RoundedBorderStyle" TargetType="Border">
             <Setter Property="BorderBrush" Value="#4A90E2"/>
-            <Setter Property="BorderThickness" Value="3"/>
+            <Setter Property="BorderThickness" Value="6"/>
             <Setter Property="CornerRadius" Value="7"/>
-            <Setter Property="Background" Value="White"/>
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Background" Value="#FAF8EF"/>
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+        <Style x:Key="BtnStyle" TargetType="Button">
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontFamily" Value="Arial Black"/>
+            <Setter Property="Background" Value="#FAF8EF"/>
+            <Setter Property="Foreground" Value="#FF7F7F6F"/>
+            <Setter Property="BorderBrush" Value="Red"/>
+            <Setter Property="BorderThickness" Value="2"/>
         </Style>
     </Window.Resources>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="204*"/>
+            <ColumnDefinition Width="203*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <!-- statistics -->
-        <Grid Grid.Row="0" Margin="10">
+        <Grid Grid.Row="0" Margin="10,10,10,10" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <Border Style="{StaticResource RoundedBorderStyle}" Grid.Column="0">
-                <StackPanel>
-                    <Label Content="Current score" FontSize="22" 
+            <Border x:Name="ScoreFrame1" Style="{StaticResource RoundedBorderStyle}" Grid.Column="0">
+                <StackPanel x:Name="Statistics1">
+                    <Label Content="Current score" FontSize="19" 
                            HorizontalAlignment="Center" VerticalAlignment="Top" 
-                           FontFamily="SimSun-ExtG"/>
-                    <TextBlock x:Name="CurrentScore" HorizontalAlignment="Center" VerticalAlignment="Top" 
-                               Width="100" Height="30" Text="{Binding Score}" Foreground="#FF3E47D0"
-                               FontFamily="Yu Gothic Medium" FontSize="24" TextAlignment="Center"/>
+                           FontFamily="SimSun-ExtG" FontWeight="Bold" />
+                    <TextBlock x:Name="CurrentScore" HorizontalAlignment="Center" 
+                               Width="100" Height="26" Text="{Binding Score}" Foreground="#FF3E47D0"
+                               FontFamily="Yu Gothic Medium" FontSize="22" TextAlignment="Center"/>
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource RoundedBorderStyle}" Grid.Column="1">
-                <StackPanel>
-                    <Label Content="Best score" FontSize="22" 
+            <Border x:Name="ScoreFrame2" Style="{StaticResource RoundedBorderStyle}" Grid.Column="1">
+                <StackPanel x:Name="Statistics2">
+                    <Label Content="Best score" FontSize="19" 
                            HorizontalAlignment="Center" VerticalAlignment="Top" 
-                           FontFamily="SimSun-ExtG"/>
-                    <TextBlock x:Name="BestScore" HorizontalAlignment="Center" VerticalAlignment="Top" Text="{Binding HighScore}"
-                             Width="100" Height="30" Foreground="#FFBB4B4B"
-                            FontFamily="Yu Gothic Medium" FontSize="24" TextAlignment="Center"/>
+                           FontFamily="SimSun-ExtG" FontWeight="Bold"/>
+                    <TextBlock x:Name="BestScore" HorizontalAlignment="Center" Text="{Binding HighScore}"
+                             Width="100" Height="26" Foreground="#FFBB4B4B"
+                            FontFamily="Yu Gothic Medium" FontSize="22" TextAlignment="Center"/>
                 </StackPanel>
             </Border>
         </Grid>
-        <Border Style="{StaticResource RoundedBorderStyle}" Grid.Row="1" BorderBrush="Red">
-            <Grid Margin="3">
+        <Border x:Name="MainFrame" Style="{StaticResource RoundedBorderStyle}" Grid.Row="1" BorderBrush="Red" Grid.ColumnSpan="2" Margin="3,3,3,3">
+            <Grid x:Name="FieldGrid" Margin="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -66,25 +83,25 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Row="0" Grid.Column="0" Content="{Binding GameGrid[0]}" Tag="00" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
-                <Button Grid.Row="0" Grid.Column="1" Content="{Binding GameGrid[1]}" Tag="01" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
-                <Button Grid.Row="0" Grid.Column="2" Content="{Binding GameGrid[2]}" Tag="02" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
-                <Button Grid.Row="0" Grid.Column="3" Content="{Binding GameGrid[3]}" Tag="03" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="0" Grid.Column="0" Content="{Binding GameGrid[0]}" Style="{StaticResource BtnStyle}"/>
+                <Button Grid.Row="0" Grid.Column="1" Content="{Binding GameGrid[1]}" Style="{StaticResource BtnStyle}"/>
+                <Button Grid.Row="0" Grid.Column="2" Content="{Binding GameGrid[2]}" Style="{StaticResource BtnStyle}"/>
+                <Button Grid.Row="0" Grid.Column="3" Content="{Binding GameGrid[3]}" Style="{StaticResource BtnStyle}"/>
 
-                <Button Grid.Row="1" Grid.Column="0" Content="{Binding GameGrid[4]}" Tag="10" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
-                <Button Grid.Row="1" Grid.Column="1" Content="{Binding GameGrid[5]}" Tag="11" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
-                <Button Grid.Row="1" Grid.Column="2" Content="{Binding GameGrid[6]}" Tag="12" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
-                <Button Grid.Row="1" Grid.Column="3" Content="{Binding GameGrid[7]}" Tag="13" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="1" Grid.Column="0" Content="{Binding GameGrid[4]}" Style="{StaticResource BtnStyle}"/>
+                <Button Grid.Row="1" Grid.Column="1" Content="{Binding GameGrid[5]}" Style="{StaticResource BtnStyle}"/>
+                <Button Grid.Row="1" Grid.Column="2" Content="{Binding GameGrid[6]}" Style="{StaticResource BtnStyle}"/>
+                <Button Grid.Row="1" Grid.Column="3" Content="{Binding GameGrid[7]}" Style="{StaticResource BtnStyle}"/>
 
-                <Button Grid.Row="2" Grid.Column="0" Content="{Binding GameGrid[8]}" Tag="20" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
-                <Button Grid.Row="2" Grid.Column="1" Content="{Binding GameGrid[9]}" Tag="21" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
-                <Button Grid.Row="2" Grid.Column="2" Content="{Binding GameGrid[10]}" Tag="22" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
-                <Button Grid.Row="2" Grid.Column="3" Content="{Binding GameGrid[11]}" Tag="23" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="2" Grid.Column="0" Content="{Binding GameGrid[8]}" Style="{StaticResource BtnStyle}"/>
+                <Button Grid.Row="2" Grid.Column="1" Content="{Binding GameGrid[9]}" Style="{StaticResource BtnStyle}"/>
+                <Button Grid.Row="2" Grid.Column="2" Content="{Binding GameGrid[10]}" Style="{StaticResource BtnStyle}"/>
+                <Button Grid.Row="2" Grid.Column="3" Content="{Binding GameGrid[11]}" Style="{StaticResource BtnStyle}"/>
 
-                <Button Grid.Row="3" Grid.Column="0" Content="{Binding GameGrid[12]}" Tag="30" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
-                <Button Grid.Row="3" Grid.Column="1" Content="{Binding GameGrid[13]}" Tag="31" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
-                <Button Grid.Row="3" Grid.Column="2" Content="{Binding GameGrid[14]}" Tag="32" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black "/>
-                <Button Grid.Row="3" Grid.Column="3" Content="{Binding GameGrid[15]}" Tag="33" Margin="1" Focusable="False" IsHitTestVisible="False" FontSize="30" FontFamily="Arial Black"/>
+                <Button Grid.Row="3" Grid.Column="0" Content="{Binding GameGrid[12]}" Style="{StaticResource BtnStyle}"/>
+                <Button Grid.Row="3" Grid.Column="1" Content="{Binding GameGrid[13]}" Style="{StaticResource BtnStyle}"/>
+                <Button Grid.Row="3" Grid.Column="2" Content="{Binding GameGrid[14]}" Style="{StaticResource BtnStyle}"/>
+                <Button Grid.Row="3" Grid.Column="3" Content="{Binding GameGrid[15]}" Style="{StaticResource BtnStyle}"/>
             </Grid>
         </Border>
     </Grid>

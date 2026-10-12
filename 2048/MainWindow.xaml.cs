@@ -19,6 +19,7 @@ namespace _2048
     public partial class MainWindow : Window
     {
         GameViewModel vm;
+        Model m;
         List<Theme> themes = new List<Theme>();
         int idx = -1;
         public MainWindow()
@@ -32,7 +33,16 @@ namespace _2048
         }
         private void OnGameEnded(string message)
         {
-            MessageBox.Show(message, "End Game");
+            var dr = MessageBox.Show(message, "End Game", MessageBoxButton.YesNo);
+            if(dr == MessageBoxResult.Yes)
+            {
+                InitializeComponent();
+                m = new Model();
+                vm = new GameViewModel(m);
+                this.DataContext = vm;
+                vm.GameEnded += OnGameEnded;
+            }
+            else { this.Close(); }
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)

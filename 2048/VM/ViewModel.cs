@@ -81,14 +81,14 @@ namespace _2048.VM
             model.NewNum();
             SyncWithModel();
             Score = model.NowScore();
-            if (Score > HighScore) HighScore = Score;
+            if (Score > HighScore) { HighScore = Score; WriteRecord(); }
             Notify();
 
             if (model.CanMove() == false && model.EmptyCellsNumber() == 0)
             {
                 IsGameOver = true;
                 WriteRecord();
-                GameEnded?.Invoke($"Поздравляем! Игра завершена.\nВаш текущий счёт: {Score}");
+                GameEnded?.Invoke($"Поздравляем! Игра завершена.\nВаш текущий счёт: {Score}\nНачать заново?");
             }
         }
         private void SyncWithModel()

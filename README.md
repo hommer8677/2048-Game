@@ -8,6 +8,7 @@
 Игра заканчивается, если на поле не остается свободных ячеек 
 
 Вы можете изменить **цветовую тему** на 1 из 10 набор цветов.
+Чтобы изменить тему нажмите на клавишу **T**. 
 Все цветовые темы представлены ниже
 
 <img width="393" height="514" alt="image" src="https://github.com/user-attachments/assets/0929b082-f932-4db6-b3b8-8aaf402c2929" />     <img width="393" height="514" alt="image" src="https://github.com/user-attachments/assets/976bf74d-0262-42ae-9d15-3c9b8e0c50db" />

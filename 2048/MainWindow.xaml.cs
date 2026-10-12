@@ -26,7 +26,7 @@ namespace _2048
         {
             InitializeComponent();
             AddThemes();
-            Model m = new Model();
+            m = new Model();
             vm = new GameViewModel(m);
             this.DataContext = vm;
             vm.GameEnded += OnGameEnded;

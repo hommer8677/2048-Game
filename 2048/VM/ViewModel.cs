@@ -12,7 +12,7 @@ namespace _2048.VM
     {
         private Model model;
         public event Action<string> GameEnded;
-        private int score;
+        private int score = 0;
         private int highScore = 0;
         private bool isGameOver;
         private string[] gameGrid = new string[16];
@@ -49,7 +49,7 @@ namespace _2048.VM
         }
         public void InitNewGame()
         {
-            Score = 0;
+            
             IsGameOver = false;
 
             model.NewNum();
@@ -84,7 +84,7 @@ namespace _2048.VM
             if (Score > HighScore) { HighScore = Score; WriteRecord(); }
             Notify();
 
-            if (model.CanMove() == false && model.EmptyCellsNumber() == 0)
+            if (model.CanMove() == false)
             {
                 IsGameOver = true;
                 WriteRecord();
